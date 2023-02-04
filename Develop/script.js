@@ -6,3 +6,22 @@ $(".saveBtn").on("click", function(){
   
   localStorage.setItem(key,value);
 });
+
+var currentHour = dayjs().hour();
+
+$(".time-block").each(function(){
+    
+  var blockHour = $(this).attr("id").split("-")[1];
+  
+  var textEntry = localStorage.getItem(blockHour);
+  var textArea = $(this).find(".description");
+  textArea.val (textEntry);
+  
+  if (blockHour < currentHour){
+      $(this).find(".description").addClass("past");
+  }else if(blockHour == currentHour){
+      $(this).find(".description").addClass("present");
+  }else{
+      $(this).find(".description").addClass("future");
+  }
+   });
